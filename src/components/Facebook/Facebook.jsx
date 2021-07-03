@@ -14,6 +14,29 @@ export class FeedbackForm extends Component {
             [event.target.value]: prevState[event.target.value] +1}))
     };
 
+
+    countTotalFeedback() {
+        let counter = 0;
+        Object.values(this.state).map((item) => (
+            counter += item
+        ));
+        if (counter) {
+            return <TextSection>Total: {counter}</TextSection>
+        } else return;
+    }
+
+    countPositiveFeedbackPercentage() {
+        let counter = 0;
+        Object.values(this.state).map((item) => (
+            counter += item
+        ));
+        const resultPercent = parseInt(this.state.good / counter * 100);
+        if (resultPercent) {
+            return <TextSection>Positive feedback: {resultPercent}%</TextSection>
+        } else return;
+    }
+    
+
     render() {
         return (
             <MainSection>
@@ -31,8 +54,12 @@ export class FeedbackForm extends Component {
                 <h2>Statistics</h2>
                 <div>
                     {Object.keys(this.state).map(keyItem => (
-                           <TextSection key={keyItem}>{keyItem}: {this.state[keyItem]}</TextSection>
+                        <TextSection key={keyItem}>
+                            {keyItem}: {this.state[keyItem]}
+                        </TextSection>
                     ))}
+                    {this.countTotalFeedback()}
+                    {this.countPositiveFeedbackPercentage()}
                 </div>
             </MainSection>
             
