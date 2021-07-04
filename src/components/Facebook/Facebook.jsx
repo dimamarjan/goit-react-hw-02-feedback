@@ -1,6 +1,8 @@
 import { Component } from "react";
-import { MainSection, Button, NoStatContent } from "./Facebook.style";
-import { Statistics } from "../Statistics/Statistics"
+import { NoStatContent } from "./Facebook.style";
+import { Statistics } from "components/Statistics/Statistics"
+import { FacebookOptions } from "components/FacebookOptions/FacebookOptions"
+import { Section } from "components/Section/Section";
 
 
 export class FeedbackForm extends Component {
@@ -11,7 +13,7 @@ export class FeedbackForm extends Component {
     };
 
 
-    buttonHeandler = (event) => {
+    buttonHandler = (event) => {
         this.setState((prevState) => ({
             [event.target.value]: prevState[event.target.value] +1}))
     };
@@ -39,31 +41,25 @@ export class FeedbackForm extends Component {
 
     render() {
         return (
-            <MainSection>
-                <h1>Please leave feedback</h1>
-                <div>
-                <FeedbackOptions options={} onLeaveFeedback={}></FeedbackOptions>
-                    {Object.keys(this.state).map(keyItem => (
-                        <Button
-                            key={keyItem}
-                            value={keyItem}
-                            onClick={this.buttonHeandler}>
-                            {keyItem}
-                        </Button>
-                    ))}
-                </div>
-                {this.countTotalFeedback() !== 0 ? 
-                    <Statistics
-                        good={this.state.good}
-                        neutral={this.state.neutral}
-                        bad={this.state.bad}
-                        total={this.countTotalFeedback()}
-                        positivePercentage={this.countPositiveFeedbackPercentage()}>
-                    </Statistics>
-                    : <NoStatContent>No feedback given</NoStatContent>
-                }
-            </MainSection>
-            
+            <>
+                <Section title={'Please leave feedback'}>
+                    <FacebookOptions
+                        options={this.state}
+                        onLeaveFeedback={this.buttonHandler} />
+                </Section>
+                <Section title={'Statistics'}>
+                    {this.countTotalFeedback() !== 0 ? 
+                        <Statistics
+                            good={this.state.good}
+                            neutral={this.state.neutral}
+                            bad={this.state.bad}
+                            total={this.countTotalFeedback()}
+                            positivePercentage={this.countPositiveFeedbackPercentage()}>
+                        </Statistics>
+                        : <NoStatContent>No feedback given</NoStatContent>
+                    }
+                </Section>
+            </>
         )
     };
 }

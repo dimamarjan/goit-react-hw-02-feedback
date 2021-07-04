@@ -10,6 +10,8 @@ export class Statistics extends Component {
                 <StatListItem>Good: {this.props.good}</StatListItem>
                 <StatListItem>Neutral: {this.props.neutral}</StatListItem>
                 <StatListItem>Bad: {this.props.bad}</StatListItem>
+                <StatListItem>Total: {this.props.total}</StatListItem>
+                <StatListItem>Positive feedbacks: {this.props.positivePercentage}%</StatListItem>
             </StatList>
         )
     };
