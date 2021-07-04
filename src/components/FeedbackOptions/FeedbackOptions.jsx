@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActionButton } from './FacebookOptions.styled';
+import { ActionButton } from './FeedbackOptions.styled';
 
 
 export class FacebookOptions extends Component {

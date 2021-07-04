@@ -1,7 +1,7 @@
 import { Component } from "react";
-import { NoStatContent } from "./Facebook.style";
+import { NoStatContent } from "./Feedback.style";
 import { Statistics } from "components/Statistics/Statistics"
-import { FacebookOptions } from "components/FacebookOptions/FacebookOptions"
+import { FacebookOptions } from "components/FeedbackOptions/FeedbackOptions"
 import { Section } from "components/Section/Section";
 
 

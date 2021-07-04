@@ -1,5 +1,5 @@
 import "./App.css";
-import { FeedbackForm } from "./components/Facebook/Facebook";
+import { FeedbackForm } from "./components/Feedback/Feedback";
 
 function App() {
   return (
