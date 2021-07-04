@@ -1,5 +1,7 @@
 import { Component } from "react";
-import { MainSection, TextSection, Button } from "./Facebook.style";
+import { MainSection, Button, NoStatContent } from "./Facebook.style";
+import { Statistics } from "../Statistics/Statistics"
+
 
 export class FeedbackForm extends Component {
     state = {
@@ -20,10 +22,9 @@ export class FeedbackForm extends Component {
         Object.values(this.state).map((item) => (
             counter += item
         ));
-        if (counter) {
-            return <TextSection>Total: {counter}</TextSection>
-        } else return;
+        return counter;
     }
+
 
     countPositiveFeedbackPercentage() {
         let counter = 0;
@@ -31,10 +32,9 @@ export class FeedbackForm extends Component {
             counter += item
         ));
         const resultPercent = parseInt(this.state.good / counter * 100);
-        if (resultPercent) {
-            return <TextSection>Positive feedback: {resultPercent}%</TextSection>
-        } else return;
+        return resultPercent;
     }
+    
     
 
     render() {
@@ -42,6 +42,7 @@ export class FeedbackForm extends Component {
             <MainSection>
                 <h1>Please leave feedback</h1>
                 <div>
+                <FeedbackOptions options={} onLeaveFeedback={}></FeedbackOptions>
                     {Object.keys(this.state).map(keyItem => (
                         <Button
                             key={keyItem}
@@ -51,16 +52,16 @@ export class FeedbackForm extends Component {
                         </Button>
                     ))}
                 </div>
-                <h2>Statistics</h2>
-                <div>
-                    {Object.keys(this.state).map(keyItem => (
-                        <TextSection key={keyItem}>
-                            {keyItem}: {this.state[keyItem]}
-                        </TextSection>
-                    ))}
-                    {this.countTotalFeedback()}
-                    {this.countPositiveFeedbackPercentage()}
-                </div>
+                {this.countTotalFeedback() !== 0 ? 
+                    <Statistics
+                        good={this.state.good}
+                        neutral={this.state.neutral}
+                        bad={this.state.bad}
+                        total={this.countTotalFeedback()}
+                        positivePercentage={this.countPositiveFeedbackPercentage()}>
+                    </Statistics>
+                    : <NoStatContent>No feedback given</NoStatContent>
+                }
             </MainSection>
             
         )
